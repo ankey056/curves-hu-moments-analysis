@@ -12,7 +12,7 @@ d <- read.table("./output/painted-contours-hu.dat",
 X <- as.matrix(d[2:9])
 
 
-a <- fastICA(X, 2, # alg.typ = "deflation", 
+a <- fastICA(X, 2, # alg.typ = "deflation",
              method = "R", row.norm = FALSE, maxit = 200,
              tol = 0.0001, verbose = TRUE)
 

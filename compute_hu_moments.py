@@ -15,7 +15,7 @@ def boundingRect_sel (rect, img_shape):
         return True
 
     return False
-    
+
 lenk = 1.0
 def contours_selection(cnts, img_shape):
     w, h = img_shape
@@ -52,7 +52,7 @@ def contour_data_record(f, cnt):
         line += " {:>20.8e}".format(m[0])
     line += " {:<}".format(ops)
     return line
-    
+
 def marked_file (path):
     des, file = os.path.split(path)
     return des + "/marked/" + file
@@ -65,7 +65,7 @@ def handle_file (path):
                              cv.CHAIN_APPROX_NONE)
     ci = contours_selection(cnts, img.shape)
 
-    
+
     if ci is not None:
         img = cv.imread(path)
         cv.drawContours(img, cnts, ci,

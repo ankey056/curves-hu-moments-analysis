@@ -82,7 +82,7 @@ def load_contours_data(hu_file, ca_file):
             i+=1
 
     return c
-            
+
 def collect_data(data, extractor, sorting_args={}):
     c = deque()
     for d in data:
@@ -92,7 +92,7 @@ def collect_data(data, extractor, sorting_args={}):
     c = list(c)
     c.sort(**sorting_args)
     return c
-    
+
 
 def collect_contours_ids(data):
     return collect_data(data, lambda x: x.id)
@@ -231,7 +231,7 @@ def write_gnuplot_plot_all_file(path, tp):
                     f.write(s)
 
         f.write(";\n")
-            
+
 
 def reform_data(data, tmaker=make_resolution_trajectories_files):
     q = deque()
@@ -256,5 +256,4 @@ if __name__ == "__main__":
         reform_data(data, tmaker=make_transformation_trajectories_files)
     else:
         reform_data(data)
-
 

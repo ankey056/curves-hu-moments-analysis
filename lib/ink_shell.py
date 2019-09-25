@@ -4,7 +4,7 @@ import subprocess as sp
 class InkShell:
     def __init__(self):
         "Open unbuffered pipe to Inkscape process"
-        self.p = sp.Popen(['inkscape', '--shell'], 
+        self.p = sp.Popen(['inkscape', '--shell'],
                           bufsize=0, universal_newlines=True,
                           stdin=sp.PIPE, stdout=sp.PIPE)
         self.read()
@@ -22,7 +22,7 @@ class InkShell:
     def write(self, words_of_wisdom):
         "Write data and newline char"
         return self.p.stdin.write(words_of_wisdom + '\n')
-    
+
     def close(self):
         "Terminate Inkscape process"
         stdout, stderr = self.p.communicate('quit\n')
@@ -30,17 +30,17 @@ class InkShell:
 
     def _query_param (self, svgfile, id, p):
         com = svgfile + " --query-id " + id + " --query-" + p
-        
+
         self.write(com)
-                                     
+
         return float(self.read())
 
     def get_svg_geometry (self, svgfile, id=None):
         """Return parameters list [xposition, yposition, width, height] of svg or,
         if id is not None, of object that is defined by id."""
         com = svgfile
-        
-        if id: 
+
+        if id:
             return map(lambda p: self._query_param(svgfile, id, p),
                        ("x", "y","width", "height"))
         else:
@@ -62,7 +62,7 @@ class InkShell:
         if width: com += " --export-width={0}".format(width)
         if id_only:
             com += " --export-id-only --export-id={0}".format(id_only)
-            
+
         self.write(com)
         self.read()
         return pngout
@@ -72,7 +72,7 @@ class InkShell:
                                   bg=None, expansion=None,
                                   rcoefs=None):
         x,y,w,h = self.get_svg_geometry(svg, id=id)
-        
+
         dx = 0
         x1 =  x
         x2 =  x + w
